@@ -1,8 +1,9 @@
 <template>
   <div class="root">
+    <div class="title">Регистрация</div>
     <form class="sign-up">
+      <div class="title2">Личные данные</div>
       <div class="personal-info">
-        <h2>Личные данные</h2>
 
         <div class="form-group">
           <label for="surName">Фамилия*</label>
@@ -24,7 +25,7 @@
           <label for="phone">Номер телефона*</label>
           <input type="tel" id="phone" v-model="phoneNumber" />
         </div>
-        <div class="form-group">
+        <div class="form-group-radio">
           <label for="chooseGender">Пол*</label>
           <div id="chooseGender" v-for="(gend, index) in genders" :key="index">
             <input type="radio" :value="gend.value" v-model="gender" />
@@ -48,21 +49,20 @@
         <div class="form-group">
           <label for="doctorGroup">Лечащий врач</label>
           <select id="doctorGroup" v-model="doctor">
-            <option 
-            v-for="(doc, index) in doctors" 
-            :value="doc.value"
-            :key="index"
+            <option
+              v-for="(doc, index) in doctors"
+              :value="doc.value"
+              :key="index"
             >
-            {{ doc.doctorName }}
+              {{ doc.doctorName }}
             </option>
           </select>
         </div>
 
-        <div class="form-group">
-          <input type="checkbox" id="sms" v-model="notSendSMS">
+        <div class="form-group-check">
+          <input type="checkbox" id="sms" v-model="notSendSMS" />
           <label for="sms">Не отправлять СМС.</label>
         </div>
-
       </div>
     </form>
   </div>
@@ -125,19 +125,37 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+<style scoped lang="sass">
+$bottomPadTitle: 10px
+
+.root
+  min-width: 700px
+  width: 100%
+  background: #fff
+  padding: 25px 30px
+  border-radius: 5px
+
+  .title
+    font-size: 25px
+    font-weight: 600
+    position: relative
+    padding-bottom: $bottomPadTitle   
+
+  .sign-up
+    
+    .title2
+      font-size: 20px
+      font-weight: 600
+      padding-bottom: $bottomPadTitle
+
+    .personal-info
+      display: block
+      justify-content: space-between
+
+      .form-group
+        width: 100%
+
+        input 
+          height: 45px
+          width: 100%
 </style>
