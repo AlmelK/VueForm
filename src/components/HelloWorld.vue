@@ -7,23 +7,23 @@
 
         <div class="form-group">
           <label for="surName">Фамилия*</label>
-          <input type="text" id="surName" v-model="surname" />
+          <input type="text" id="surName" v-model="surname" placeholder="Введите вашу фамилию"/>
         </div>
         <div class="form-group">
           <label for="name">Имя*</label>
-          <input type="text" id="name" v-model="clientName" />
+          <input type="text" id="name" v-model="clientName" placeholder="Введите ваше имя"/>
         </div>
         <div class="form-group">
           <label for="third_name">Отчество</label>
-          <input type="text" id="third_name" v-model="thirdName" />
+          <input type="text" id="third_name" v-model="thirdName" placeholder="Введите ваше отчество"/>
         </div>
         <div class="form-group">
           <label for="birth_day">Дата рождения*</label>
-          <input type="date" id="birth_day" v-model="birthday" />
+          <input type="date" id="birth_day" v-model="birthday" placeholder="Введите вашу дату рождения"/>
         </div>
         <div class="form-group">
           <label for="phone">Номер телефона*</label>
-          <input type="tel" id="phone" v-model="phoneNumber" />
+          <input type="tel" id="phone" v-model="phoneNumber" placeholder="Введите ваш номер телефона"/>
         </div>
         <div class="form-group-radio">
           <label for="chooseGender">Пол*</label>
@@ -127,16 +127,23 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="sass">
 $bottomPadTitle: 10px
+%form-group-labels
+  display: block
+  font-size: 18px
+  font-weight: 600
+  margin-bottom: 5px
 
 .root
   min-width: 700px
   width: 100%
   background: #fff
   padding: 25px 30px
-  border-radius: 5px
+  border-radius: 15px
+  box-shadow: 8px 8px 5px 2px #c0c0c0
 
   .title
-    font-size: 25px
+    text-align: center
+    font-size: 28px
     font-weight: 600
     position: relative
     padding-bottom: $bottomPadTitle   
@@ -144,7 +151,7 @@ $bottomPadTitle: 10px
   .sign-up
     
     .title2
-      font-size: 20px
+      font-size: 22px
       font-weight: 600
       padding-bottom: $bottomPadTitle
 
@@ -153,9 +160,38 @@ $bottomPadTitle: 10px
       justify-content: space-between
 
       .form-group
+        margin: 20px 0 10px 0
         width: 100%
+
+        label
+          @extend %form-group-labels
 
         input 
           height: 45px
           width: 100%
+          outline: none
+          border-radius: 5px
+          border: 1px solid #ccc
+          padding-left: 15px
+          font-size: 16px
+          border-bottom-width: 2px
+          transition: all 0.3s ease
+
+          &:focus
+            border-color: #696969
+      
+      .form-group-radio
+        margin: 20px 0 10px 0
+        width: 100%
+
+        label
+          @extend %form-group-labels
+
+        #chooseGender
+          width: 80%
+          display: inline-block
+          justify-content: space-around
+          
+
+      
 </style>
