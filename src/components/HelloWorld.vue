@@ -4,46 +4,90 @@
     <form class="sign-up">
       <div class="title2">Личные данные</div>
       <div class="personal-info">
-
         <div class="form-group">
-          <label for="surName">Фамилия*</label>
-          <input type="text" id="surName" v-model="surname" placeholder="Введите вашу фамилию"/>
+          <label for="surName">Фамилия</label>
+          <input
+            type="text"
+            id="surName"
+            v-model="surname"
+            placeholder="Введите вашу фамилию"
+          />
         </div>
         <div class="form-group">
-          <label for="name">Имя*</label>
-          <input type="text" id="name" v-model="clientName" placeholder="Введите ваше имя"/>
+          <label for="name">Имя</label>
+          <input
+            type="text"
+            id="name"
+            v-model="clientName"
+            placeholder="Введите ваше имя"
+          />
         </div>
-        <div class="form-group">
+        <div class="form-group-not-important">
           <label for="third_name">Отчество</label>
-          <input type="text" id="third_name" v-model="thirdName" placeholder="Введите ваше отчество"/>
+          <input
+            type="text"
+            id="third_name"
+            v-model="thirdName"
+            placeholder="Введите ваше отчество"
+          />
         </div>
         <div class="form-group">
-          <label for="birth_day">Дата рождения*</label>
-          <input type="date" id="birth_day" v-model="birthday" placeholder="Введите вашу дату рождения"/>
+          <label for="birth_day">Дата рождения</label>
+          <input
+            type="date"
+            id="birth_day"
+            v-model="birthday"
+            placeholder="Введите вашу дату рождения"
+          />
         </div>
         <div class="form-group">
-          <label for="phone">Номер телефона*</label>
-          <input type="tel" id="phone" v-model="phoneNumber" placeholder="Введите ваш номер телефона"/>
+          <label for="phone">Номер телефона</label>
+          <input
+            type="tel"
+            id="phone"
+            v-model="phoneNumber"
+            placeholder="Введите ваш номер телефона"
+          />
         </div>
-        <div class="form-group-radio">
-          <label for="chooseGender">Пол*</label>
-          <div id="chooseGender" v-for="(gend, index) in genders" :key="index">
-            <input type="radio" :value="gend.value" v-model="gender" />
-            {{ gend.gen }}
+
+        <div class="gender-radio">
+          <label class="label_gen" for="gender">Пол</label>
+          <div id="gender">            
+              <input
+                class="radio"
+                type="radio"
+                id="m"
+                value="male"
+                v-model="gender"
+              />
+              <label for="m">М</label>            
+
+              <input
+                class="radio"
+                type="radio"
+                id="f"
+                value="female"
+                v-model="gender"
+              />
+              <label for="f">Ж</label>
           </div>
         </div>
 
         <div class="form-group">
-          <label for="clientGroup">Группа клиентов*</label>
-          <select id="clientGroup" v-model="selectedGroups" multiple>
+          <label for="clientGroup">Группа клиентов</label>
+          <select id="clientGroup" v-model="selectedGroups" multiple size="0">
             <option
               v-for="(g, index) in clientsGroup"
               :value="g.value"
               :key="index"
             >
               {{ g.group }}
-            </option>
+            </option>            
           </select>
+          <div class="selected-options">
+              <div class="selected-opt" v-for="selected, index in selectedGroups" :key="index">{{selected}}</div>
+          </div>
+          
         </div>
 
         <div class="form-group">
@@ -58,7 +102,6 @@
             </option>
           </select>
         </div>
-
         <div class="form-group-check">
           <input type="checkbox" id="sms" v-model="notSendSMS" />
           <label for="sms">Не отправлять СМС.</label>
@@ -78,16 +121,9 @@ export default {
       birthday: "",
       phoneNumber: "",
       gender: "male",
-      genders: [
-        {
-          gen: "М",
-          value: "male",
-        },
-        {
-          gen: "Ж",
-          value: "female",
-        },
-      ],
+      selectedGroups: ["OMS"],
+      doctor: "",
+      notSendSMS: false,
       clientsGroup: [
         {
           group: "VIP",
@@ -102,8 +138,6 @@ export default {
           value: "OMS",
         },
       ],
-      selectedGroups: ["OMS"],
-      doctor: "",
       doctors: [
         {
           doctorName: "Иванов",
@@ -118,7 +152,6 @@ export default {
           value: "Chernisheva",
         },
       ],
-      notSendSMS: false,
     };
   },
 };
@@ -133,6 +166,24 @@ $bottomPadTitle: 10px
   font-weight: 600
   margin-bottom: 5px
 
+%important_fields
+  content: "*"
+  position: relative
+  font-size: 18px
+  color: red
+
+%input_forms
+  height: 40px
+  width: 100%
+  outline: none
+  border-radius: 5px
+  border: 1px solid #ccc
+  padding-left: 15px
+  padding-right: 5px
+  font-size: 16px
+  border-bottom-width: 2px
+  transition: all 0.3s ease
+
 .root
   min-width: 700px
   width: 100%
@@ -146,10 +197,10 @@ $bottomPadTitle: 10px
     font-size: 28px
     font-weight: 600
     position: relative
-    padding-bottom: $bottomPadTitle   
+    padding-bottom: $bottomPadTitle
 
   .sign-up
-    
+
     .title2
       font-size: 22px
       font-weight: 600
@@ -159,6 +210,19 @@ $bottomPadTitle: 10px
       display: block
       justify-content: space-between
 
+      .form-group-not-important
+        margin: 20px 0 10px 0
+        width: 100%
+
+        label
+          @extend %form-group-labels
+
+        input, select
+           @extend %input_forms
+
+           &::placeholder
+            color: #a8acc9
+
       .form-group
         margin: 20px 0 10px 0
         width: 100%
@@ -166,32 +230,73 @@ $bottomPadTitle: 10px
         label
           @extend %form-group-labels
 
-        input 
-          height: 45px
-          width: 100%
-          outline: none
-          border-radius: 5px
-          border: 1px solid #ccc
-          padding-left: 15px
-          font-size: 16px
-          border-bottom-width: 2px
-          transition: all 0.3s ease
+          &:after
+            @extend %important_fields
+
+        input, select
+          @extend %input_forms
+
+          &::placeholder
+            color: #a8acc9
+        
+        select
+          
 
           &:focus
             border-color: #696969
-      
-      .form-group-radio
-        margin: 20px 0 10px 0
-        width: 100%
+      .gender-radio
 
-        label
-          @extend %form-group-labels
-
-        #chooseGender
-          width: 80%
-          display: inline-block
-          justify-content: space-around
+        .label_gen
+          font-size: 18px
+          font-weight: 600
           
+          &:after
+            @extend %important_fields
 
-      
+        #gender
+          margin: 14px 0
+          display: flex
+          width: 15%        
+          justify-content: space-between
+
+          label
+            margin-right: 5px
+
+          .radio
+            width: 15px
+            height: 15px
+
+      #clientGroup
+        height: 100px
+        padding-top: 5px
+        overflow-y: hidden
+
+        option
+          padding-bottom: 5px
+          padding-top: 5px
+          padding-left: 5px
+          margin-right: 5px
+          border-radius: 10px
+
+      .selected-options
+        display: flex
+        padding: 8px 5px
+        justify-content: start
+        width: 100%
+        
+        .selected-opt
+          padding: 8px 16px
+          border-radius: 15px
+          background: #e5e5e5
+          margin-right: 10px
+        
+
+        
+
+
+
+         
+            
+          
+        
 </style>
