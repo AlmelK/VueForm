@@ -102,10 +102,12 @@
             </option>
           </select>
         </div>
+
         <div class="form-group-check">
           <input type="checkbox" id="sms" v-model="notSendSMS" />
           <label for="sms">Не отправлять СМС.</label>
         </div>
+        
       </div>
     </form>
   </div>
@@ -237,13 +239,8 @@ $bottomPadTitle: 10px
           @extend %input_forms
 
           &::placeholder
-            color: #a8acc9
-        
-        select
-          
+            color: #a8acc9        
 
-          &:focus
-            border-color: #696969
       .gender-radio
 
         .label_gen
@@ -269,7 +266,7 @@ $bottomPadTitle: 10px
       #clientGroup
         height: 100px
         padding-top: 5px
-        overflow-y: hidden
+        overflow-y: hidden      
 
         option
           padding-bottom: 5px
@@ -284,19 +281,21 @@ $bottomPadTitle: 10px
         justify-content: start
         width: 100%
         
+        
         .selected-opt
           padding: 8px 16px
           border-radius: 15px
           background: #e5e5e5
-          margin-right: 10px
+          margin-right: 10px 
+
+      .form-group-check
+        margin-top: 20px
+        display: flex
         
-
-        
-
-
-
-         
-            
-          
-        
+        input[type=checkbox]
+          width: 18px
+          height: 18px
+          margin: 10px 5px
+        label
+          padding: 10px 5px
 </style>
