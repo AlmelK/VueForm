@@ -11,7 +11,7 @@
             id="surName"
             v-model.trim="formData.surname"
             placeholder="Введите вашу фамилию"
-            :class="{invalid: ($v.formData.surname.$dirty && !$v.formData.surname.required) ||($v.formData.surname.$dirty && !$v.formData.surname.minLength) || ($v.formData.surname.$dirty && !$v.formData.surname.alpha)}"
+            :class="$v.formData.surname.$error ? 'invalid' : ''"
           />
           <small class="helper-text"
           v-if="$v.formData.surname.$dirty && !$v.formData.surname.required">Поле не должно быть пустым</small>
@@ -28,7 +28,7 @@
             id="name"
             v-model="formData.clientName"
             placeholder="Введите ваше имя"
-            :class="{invalid: ($v.formData.clientName.$dirty && !$v.formData.clientName.required) ||($v.formData.clientName.$dirty && !$v.formData.clientName.minLength) || ($v.formData.clientName.$dirty && !$v.formData.clientName.alpha)}"
+            :class="$v.formData.clientName.$error ? 'invalid' : ''"
           />
           <small class="helper-text"
           v-if="$v.formData.clientName.$dirty && !$v.formData.clientName.required">Поле не должно быть пустым</small>
@@ -52,7 +52,7 @@
           type="date" 
           id="birth_day" 
           v-model="formData.birthday"
-          :class="{invalid: ($v.formData.birthday.$dirty && !$v.formData.birthday.required)}"
+          :class="$v.formData.birthday.$error ? 'invalid' : ''"
            />
            <small class="helper-text"
           v-if="$v.formData.birthday.$dirty && !$v.formData.birthday.required">Обязательно укажите дату рождения</small>
@@ -64,10 +64,7 @@
             id="phone"
             v-model="formData.phoneNumber"
             placeholder="Введите номер телефона"
-            :class="{invalid: ($v.formData.phoneNumber.$dirty && !$v.formData.phoneNumber.required) || 
-            ($v.formData.phoneNumber.$dirty && !$v.formData.phoneNumber.minLength) ||
-            ($v.formData.phoneNumber.$dirty && !$v.formData.phoneNumber.maxLength) ||
-            ($v.formData.phoneNumber.$dirty && !$v.formData.phoneNumber.alpha) }"
+            :class="$v.formData.phoneNumber.$error ? 'invalid' : ''"
           />
           <small class="helper-text"
           v-if="$v.formData.phoneNumber.$dirty && !$v.formData.phoneNumber.required">Поле не должно быть пустым</small>
@@ -104,11 +101,16 @@
 
         <div class="form-group">
           <label for="clientGroup">Группа клиентов</label>
-          <select id="clientGroup" v-model="formData.selectedGroups" multiple>
+          <select id="clientGroup"
+           v-model="formData.selectedGroups" 
+           multiple
+           :class="$v.formData.selectedGroups.$error ? 'invalid' : ''">
             <option v-for="(g, index) in clientsGroup" :value="g" :key="index">
               {{ g.group }}
             </option>
           </select>
+           <small class="helper-text"
+          v-if="$v.formData.selectedGroups.$dirty && !$v.formData.selectedGroups.required">Пожалуйста выберите что-нибудь</small>
           <div class="selected-options">
             <div
               class="selected-opt"
@@ -233,7 +235,7 @@ export default {
         birthday: [],
         phoneNumber: "",
         gender: "male",
-        selectedGroups: [{ group: "ОМС", value: "OMS" }],
+        selectedGroups: [],
         doctor: [{ doctorName: "Иванов", value: "Ivanov" }],
         notSendSMS: false,
         country: "",
@@ -328,10 +330,10 @@ export default {
     },
   methods: {
     submitHandler() {
-      if(this.$v.$invalid){
-        this.$v.$touch()
-        console.log('Валидация прошла успешно')
-        return
+      this.$v.formData.$touch()
+      if(!this.$v.formData.$error){
+        console.log("Валидация прошла успешно")
+        alert("Успех!")
       }
     }
   }
