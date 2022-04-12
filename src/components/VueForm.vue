@@ -13,13 +13,23 @@
             placeholder="Введите вашу фамилию"
             :class="$v.formData.surname.$error ? 'invalid' : ''"
           />
-          <small class="helper-text"
-          v-if="$v.formData.surname.$dirty && !$v.formData.surname.required">Поле не должно быть пустым</small>
-          <small class="helper-text"
-          v-else-if="$v.formData.surname.$dirty && !$v.formData.surname.minLength">Слишком короткое значение</small>
-          <small class="helper-text"
-          v-else-if="$v.formData.surname.$dirty && !$v.formData.surname.alpha">Фамилия должна начинаться с большой буквы</small>
-
+          <small
+            class="helper-text"
+            v-if="$v.formData.surname.$dirty && !$v.formData.surname.required"
+            >Поле не должно быть пустым</small
+          >
+          <small
+            class="helper-text"
+            v-else-if="
+              $v.formData.surname.$dirty && !$v.formData.surname.minLength
+            "
+            >Слишком короткое значение</small
+          >
+          <small
+            class="helper-text"
+            v-else-if="$v.formData.surname.$dirty && !$v.formData.surname.alpha"
+            >Фамилия должна начинаться с большой буквы</small
+          >
         </div>
         <div class="form-group">
           <label for="name">Имя</label>
@@ -30,12 +40,27 @@
             placeholder="Введите ваше имя"
             :class="$v.formData.clientName.$error ? 'invalid' : ''"
           />
-          <small class="helper-text"
-          v-if="$v.formData.clientName.$dirty && !$v.formData.clientName.required">Поле не должно быть пустым</small>
-          <small class="helper-text"
-          v-else-if="$v.formData.clientName.$dirty && !$v.formData.clientName.minLength">Слишком короткое значение</small>
-          <small class="helper-text"
-          v-else-if="$v.formData.clientName.$dirty && !$v.formData.clientName.alpha">Имя должно начинаться с большой буквы</small>
+          <small
+            class="helper-text"
+            v-if="
+              $v.formData.clientName.$dirty && !$v.formData.clientName.required
+            "
+            >Поле не должно быть пустым</small
+          >
+          <small
+            class="helper-text"
+            v-else-if="
+              $v.formData.clientName.$dirty && !$v.formData.clientName.minLength
+            "
+            >Слишком короткое значение</small
+          >
+          <small
+            class="helper-text"
+            v-else-if="
+              $v.formData.clientName.$dirty && !$v.formData.clientName.alpha
+            "
+            >Имя должно начинаться с большой буквы</small
+          >
         </div>
         <div class="form-group-not-important">
           <label for="third_name">Отчество</label>
@@ -48,14 +73,23 @@
         </div>
         <div class="form-group">
           <label for="birth_day">Дата рождения</label>
-          <input 
-          type="date" 
-          id="birth_day" 
-          v-model="formData.birthday"
-          :class="$v.formData.birthday.$error ? 'invalid' : ''"
-           />
-           <small class="helper-text"
-          v-if="$v.formData.birthday.$dirty && !$v.formData.birthday.required">Обязательно укажите дату рождения</small>
+          <input
+            type="date"
+            id="birth_day"
+            v-model="formData.birthday"
+            :class="$v.formData.birthday.$error ? 'invalid' : ''"
+          />
+          <small
+            class="helper-text"
+            v-if="$v.formData.birthday.$dirty && !$v.formData.birthday.required"
+            >Обязательно укажите дату рождения</small
+          >
+          <small
+            class="helper-text"
+            v-if="
+              $v.formData.birthday.$dirty && !$v.formData.birthday.minValue
+            "
+            >Этот день еще даже не наступил!</small>
         </div>
         <div class="form-group">
           <label for="phone">Номер телефона</label>
@@ -66,14 +100,37 @@
             placeholder="Введите номер телефона"
             :class="$v.formData.phoneNumber.$error ? 'invalid' : ''"
           />
-          <small class="helper-text"
-          v-if="$v.formData.phoneNumber.$dirty && !$v.formData.phoneNumber.required">Поле не должно быть пустым</small>
-          <small class="helper-text"
-          v-else-if="$v.formData.phoneNumber.$dirty && !$v.formData.phoneNumber.minLength">Минимум 11 цифр</small>
-          <small class="helper-text"
-          v-else-if="$v.formData.phoneNumber.$dirty && !$v.formData.phoneNumber.maxLength">Максимум 11 цифр</small>
-          <small class="helper-text"
-          v-else-if="$v.formData.phoneNumber.$dirty && !$v.formData.phoneNumber.alpha">Некорректный формат, попробуйте начать с 7</small>
+          <small
+            class="helper-text"
+            v-if="
+              $v.formData.phoneNumber.$dirty &&
+              !$v.formData.phoneNumber.required
+            "
+            >Поле не должно быть пустым</small
+          >
+          <small
+            class="helper-text"
+            v-else-if="
+              $v.formData.phoneNumber.$dirty &&
+              !$v.formData.phoneNumber.minLength
+            "
+            >Минимум 11 цифр</small
+          >
+          <small
+            class="helper-text"
+            v-else-if="
+              $v.formData.phoneNumber.$dirty &&
+              !$v.formData.phoneNumber.maxLength
+            "
+            >Максимум 11 цифр</small
+          >
+          <small
+            class="helper-text"
+            v-else-if="
+              $v.formData.phoneNumber.$dirty && !$v.formData.phoneNumber.alpha
+            "
+            >Некорректный формат</small
+          >
         </div>
 
         <div class="gender-radio">
@@ -101,16 +158,24 @@
 
         <div class="form-group">
           <label for="clientGroup">Группа клиентов</label>
-          <select id="clientGroup"
-           v-model="formData.selectedGroups" 
-           multiple
-           :class="$v.formData.selectedGroups.$error ? 'invalid' : ''">
+          <select
+            id="clientGroup"
+            v-model="formData.selectedGroups"
+            multiple
+            :class="$v.formData.selectedGroups.$error ? 'invalid' : ''"
+          >
             <option v-for="(g, index) in clientsGroup" :value="g" :key="index">
               {{ g.group }}
             </option>
           </select>
-           <small class="helper-text"
-          v-if="$v.formData.selectedGroups.$dirty && !$v.formData.selectedGroups.required">Пожалуйста выберите что-нибудь</small>
+          <small
+            class="helper-text"
+            v-if="
+              $v.formData.selectedGroups.$dirty &&
+              !$v.formData.selectedGroups.required
+            "
+            >Пожалуйста выберите что-нибудь</small
+          >
           <div class="selected-options">
             <div
               class="selected-opt"
@@ -143,22 +208,55 @@
 
         <div class="form-group-not-important">
           <label>Страна</label>
-          <input type="text" v-model="formData.country" placeholder="Введите страну" />
+          <input
+            type="text"
+            v-model="formData.country"
+            placeholder="Введите страну"
+          />
         </div>
 
         <div class="form-group-not-important">
           <label>Область</label>
-          <input type="text" v-model="formData.region" placeholder="Введите область" />
+          <input
+            type="text"
+            v-model="formData.region"
+            placeholder="Введите область"
+          />
         </div>
 
         <div class="form-group">
           <label>Город</label>
-          <input type="text" v-model="formData.city" placeholder="Введите город" />
+          <input
+            type="text"
+            v-model="formData.city"
+            placeholder="Введите город"
+            :class="$v.formData.city.$error ? 'invalid' : ''"
+          />
+
+          <small
+            class="helper-text"
+            v-if="$v.formData.city.$dirty && !$v.formData.city.minLength"
+            >Слишком короткое значение</small
+          >
+          <small
+            class="helper-text"
+            v-else-if="$v.formData.city.$dirty && !$v.formData.city.required"
+            >Поле не должно быть пустым</small
+          >
+          <small
+            class="helper-text"
+            v-else-if="$v.formData.city.$dirty && !$v.formData.city.alpha"
+            >Название города с большой буквы</small
+          >
         </div>
 
         <div class="form-group-not-important">
           <label>Улица</label>
-          <input type="text" v-model="formData.street" placeholder="Введите адрес" />
+          <input
+            type="text"
+            v-model="formData.street"
+            placeholder="Введите адрес"
+          />
         </div>
 
         <div class="form-group-two-fields">
@@ -169,7 +267,11 @@
 
           <div class="field-two">
             <label>Индекс</label>
-            <input type="text" v-model="formData.zipcode" placeholder="Индекс" />
+            <input
+              type="text"
+              v-model="formData.zipcode"
+              placeholder="Индекс"
+            />
           </div>
         </div>
       </div>
@@ -179,7 +281,10 @@
 
         <div class="form-group">
           <label>Тип документа</label>
-          <select v-model="formData.documentType">
+          <select
+            v-model="formData.documentType"
+            :class="$v.formData.documentType.$error ? 'invalid' : ''"
+          >
             <option disabled value="">Выберите один из вариантов</option>
             <option
               v-for="(document, index) in documentTypes"
@@ -189,28 +294,65 @@
               {{ document.doctype }}
             </option>
           </select>
+          <small
+            class="helper-text"
+            v-if="
+              $v.formData.documentType.$dirty &&
+              !$v.formData.documentType.required
+            "
+            >Выберите что-нибудь</small
+          >
         </div>
 
         <div class="form-group-two-fields">
           <div class="field-one">
             <label>Серия</label>
-            <input type="text" v-model="formData.passportSeries" placeholder="Серия" />
+            <input
+              type="text"
+              v-model="formData.passportSeries"
+              placeholder="Серия"
+            />
           </div>
 
           <div class="field-two">
             <label>Номер</label>
-            <input type="text" v-model="formData.passportNumber" placeholder="Номер" />
+            <input
+              type="text"
+              v-model="formData.passportNumber"
+              placeholder="Номер"
+            />
           </div>
         </div>
 
         <div class="form-group-not-important">
           <label>Кем выдан</label>
-          <input type="text" v-model="formData.issuedBy" placeholder="Введите адрес" />
+          <input
+            type="text"
+            v-model="formData.issuedBy"
+            placeholder="Введите адрес"
+          />
         </div>
 
         <div class="form-group">
           <label for="issued_date">Дата выдачи</label>
-          <input type="date" id="issued_date" v-model="formData.issuedDate" />
+          <input
+            type="date"
+            id="issued_date"
+            v-model="formData.issuedDate"
+            :class="$v.formData.issuedDate.$error ? 'invalid' : ''"
+          />
+          <small
+            class="helper-text"
+            v-if="
+              $v.formData.issuedDate.$dirty && !$v.formData.issuedDate.required
+            "
+            >Обязяательно укажите дату выдачи документа</small>
+          <small
+            class="helper-text"
+            v-if="
+              $v.formData.issuedDate.$dirty && !$v.formData.issuedDate.minValue
+            "
+            >Этот день еще даже не наступил!</small>
         </div>
       </div>
       <div class="send-button">
@@ -222,7 +364,7 @@
 
 <script>
 import { validationMixin } from "vuelidate";
-import { required, minLength, maxLength } from "vuelidate/lib/validators"
+import { required, minLength, maxLength } from "vuelidate/lib/validators";
 
 export default {
   mixins: [validationMixin],
@@ -244,12 +386,7 @@ export default {
         street: "",
         house: "",
         zipcode: "",
-        documentType: [
-          {
-            doctype: "Паспорт",
-            value: "Passport",
-          },
-        ],
+        documentType: [],
         passportSeries: "",
         passportNumber: "",
         issuedBy: "",
@@ -302,42 +439,51 @@ export default {
   },
   validations: {
     formData: {
-      surname: { 
-        required, 
+      surname: {
+        required,
         minLength: minLength(4),
-        alpha: val => /^[А-ЯA-Z]/.test(val)
-        },
-      clientName: {
-        required, 
-        minLength: minLength(3),
-        alpha: val => /^[А-ЯA-Z]/.test(val)
+        alpha: (val) => /^[А-ЯA-Z]/.test(val),
       },
-      birthday: {required},
+      clientName: {
+        required,
+        minLength: minLength(3),
+        alpha: (val) => /^[А-ЯA-Z]/.test(val),
+      },
+      birthday: {
+        required,
+        minValue: (value) => value < new Date().toISOString(),
+      },
       phoneNumber: {
-        required, 
+        required,
         minLength: minLength(11),
         maxLength: maxLength(11),
-        alpha: val =>  /^7\d/.test(val)
+        alpha: (val) => /^7\d{10}$/.test(val),
       },
-      selectedGroups:{ required },
+      selectedGroups: { required },
       city: {
         required,
         minLength: minLength(3),
-        alpha: val => /^[А-ЯA-Z]/.test(val)
-      }
+        alpha: (val) => /^[А-ЯA-Z]/.test(val),
       },
-      
+      documentType: { required },
+      issuedDate: {
+        required,
+        minValue: (value) => value < new Date().toISOString(),
+      },
     },
+  },
   methods: {
     submitHandler() {
-      this.$v.formData.$touch()
-      if(!this.$v.formData.$error){
-        console.log("Валидация прошла успешно")
-        alert("Успех!")
+      this.$v.formData.$touch();
+      if (!this.$v.formData.$error) {
+        console.log("Валидация прошла успешно");
+        alert("Все данные введены корректно, спасибо, что вы с нами!");
       }
-    }
-  }
-  
+    },
+    currentDate() {
+      return new Date().toLocaleDateString();
+    },
+  },
 };
 </script>
 
@@ -435,14 +581,14 @@ $bottomPadTitle: 5px
       .form-group
         margin: 20px 0 10px 0
         width: 100%
-        
+
         .invalid
           border: 1px solid red
           transition: .2s
-        
+
         .helper-text
           font-size: 12px
-          color: red  
+          color: red
 
         label
           @extend %form-group-labels
@@ -462,7 +608,6 @@ $bottomPadTitle: 5px
           font-size: 18px
           font-weight: 600
           color: #666
-
 
         #gender
           margin: 14px 0
